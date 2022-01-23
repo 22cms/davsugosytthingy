@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+	<head>
+		<title>YouTube Troll Thumbnails</title>
+		<style>@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');</style>
+		<link rel="stylesheet" href="css/index.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+		<meta content="utf-8" http-equiv="encoding">
+	</head>
+	<body>
+		<h1>YouTube Troll Thumbnails</h1>
+		<div id="post-body">
+			<div class="section">
+				<h2 class="translatable" stringid="videoScraping">Video Scraping</h2>
+				<p class="textbox-description translatable" stringid="ytUrl">YouTube URL or Video ID</p>
+				<input id="url-textbox" class="textbox" autocomplete="off" oninput="getVideo()" placeholder="YouTube URL/Video ID" type="text">
+				<div id="video-preview">
+					<div id="video-thumb-contain">
+						<img id="video-thumb" src="https://i.ytimg.com/vi/sftcghFHfvs/mqdefault.jpg"/>
+						<span id="video-length">1:40</span>
+					</div>
+					<div id="video-info">
+						<img id="channel-thumb" src="https://yt3.ggpht.com/so9l4_780RU8rsDbTWlQdj5G732XdvBPtuERznue0lWzqi9YShK-92C8BS-Nz5_86-VWXAr5lg=s240-c-k-c0x00ffffff-no-nd-rj"/>
+						<div id="info-text">
+							<p id="video-title">TOP 10 BIG CHUNGUS RULE 34 NFTs!!</p>
+							<p id="video-channel">DAVSUGO · 420.069 visualizzazioni · 1 mese fa</p>
+						</div>
+						<svg id="three-dots" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+					</div>
+				</div>
+			</div>
+			<div class="section no-max">
+				<h2 class="translatable" stringid="editPreview">Edit Video Preview</h2>
+				<p class="textbox-description translatable" stringid="videoTitle">Video Title</p>
+				<input id="title-textbox" class="textbox" autocomplete="off" oninput="updateVideoChannel()" placeholder="Video title" type="text">
+				<p class="textbox-description translatable" stringid="channelName">Channel Name</p>
+				<input id="channel-textbox" class="textbox" autocomplete="off" oninput="updateVideoChannel()"  placeholder="Channel Name" type="text">
+				<p class="textbox-description translatable" stringid="totalViews">Total Views</p>
+				<input id="viewcount-textbox" class="textbox" autocomplete="off" oninput="updateVideoChannel()"  placeholder="Total Views" type="text">
+				<p class="textbox-description translatable" stringid="releaseDate">Release Date (in ISO 8601)</p>
+				<input id="date-textbox" class="textbox" autocomplete="off" oninput="updateVideoChannel()"  placeholder="Release Date" type="text">
+				<p class="textbox-description translatable" stringid="videoDuration">Video Duration (in ISO 8601 PT)</p>
+				<input id="length-textbox" class="textbox" autocomplete="off" oninput="updateVideoChannel()"  placeholder="Video Duration" type="text">
+				
+				<p class="textbox-description translatable" stringid="previewTheme">Preview Theme</p>
+				<form id="preview-theme-form" autocomplete="off" onclick="changeTheme()">
+					<label>
+						<input type="radio" name="previewTheme" value="light-mode" checked="checked">
+						<span class="radio-label">Light Mode</span>
+					</label>
+					<label>
+						<input type="radio" name="previewTheme" value="dark-mode">
+						<span class="radio-label">Dark Mode</span>
+					</label>
+					<label>
+						<input type="radio" name="previewTheme" value="amoled-mode">
+						<span class="radio-label">AMOLED Mode</span>
+					</label>
+			</form>
+			<p class="textbox-description translatable" stringid="previewZoom">Preview Zoom</p>
+			<input id="preview-zoom-slider" onchange="zoomPreview(this)" type="range" min="0" max="100" value="100">
+			</div>
+		</div>
+		
+	<script src="js/gitignored-api-key.js"></script>
+	<script src="js/translations.js"></script>
+	<script src="js/index.js"></script>
+	</body>
+</html>
