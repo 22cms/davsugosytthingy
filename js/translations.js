@@ -7,8 +7,8 @@ const translations = {
 		"videoTitle": "Video title",
 		"channelName": "Channel name",
 		"totalViews": "Total views",
-		"releaseDate": "Release date (in ISO 8601)",
-		"videoDuration": "Video duration (in ISO 8601 PT)",
+		"releaseDate": "Release date",
+		"videoDuration": "Video duration",
 		"previewTheme": "Preview theme",
 		"previewZoom": "Preview zoom",
 		
@@ -32,8 +32,8 @@ const translations = {
 		"videoTitle": "Titolo del video",
 		"channelName": "Nome del canale",
 		"totalViews": "Visualizzazioni totali",
-		"releaseDate": "Data di pubblicazione (in ISO 8601)",
-		"videoDuration": "Durata del video (in ISO 8601 PT)",
+		"releaseDate": "Data di pubblicazione",
+		"videoDuration": "Durata del video",
 		"previewTheme": "Tema dell'anteprima",
 		"previewZoom": "Zoom anteprima",
 		
