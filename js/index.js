@@ -54,9 +54,9 @@ function fetchVideoInfo(id) {
 			
 			titleTextBox.value = results.snippet.title;
 			channelTextBox.value = results.snippet.channelTitle;
-			viewCountTextBox.value = results.statistics.viewCount;
-			dateTextBox.value = results.snippet.publishedAt;
-			lengthTextBox.value = results.contentDetails.duration;
+			viewCountTextBox.value = formatViewCount(results.statistics.viewCount);
+			dateTextBox.value = formatDate(results.snippet.publishedAt);
+			lengthTextBox.value = getDuration(results.contentDetails.duration).string;
 			
 			videoLength.innerText = getDuration(results.contentDetails.duration).string;
 			videoChannel.innerText = formatChannelString(results.snippet.channelTitle, 
@@ -87,9 +87,19 @@ function fetchChannelImage(channelId) {
 	xhr.send();
 }
 
-//Function: Makes a formatted Channel String from input data
-function formatChannelString(channelTitle, viewCount, publishedAt) {
+//Functions: Makes a formatted Channel String from input data
+function formatChannelString(channelTitle, viewCountISO, publishedAtISO) {
 	//Format the View Count
+	viewCountStr = formatViewCount(viewCountISO);
+	//Format the Date
+	dateAgo = formatDate(publishedAtISO);
+	
+	completeChannel = completeChannelString(channelTitle, viewCountStr, dateAgo)
+	
+	return completeChannel;
+}
+
+function formatViewCount(viewCount) {
 	formatter = new Intl.NumberFormat();
 	var viewCountStr = viewCount.toString();
 	
@@ -97,11 +107,14 @@ function formatChannelString(channelTitle, viewCount, publishedAt) {
 		if (viewCount >= 1000000) viewCountStr = Math.floor(viewCount/1000000).toString() + curLang.milionOf;
 		else viewCountStr = formatter.format(viewCount).toString();
 	}
-	//Format the Date
+	return `${viewCountStr} ${curLang.views}`;
+}
+
+function formatDate(publishedAtISO) {
 	dateFormatter = new Date();
 	var dateAgo = "1 minute";
 	
-	var d1 = new Date(publishedAt), // Publication Date in ISO format
+	var d1 = new Date(publishedAtISO), // Publication Date in ISO format
 		d2 = new Date(); // Current ISO Date
 	var diff = d2 - d1;
 	var tempDate, agoType;
@@ -113,11 +126,15 @@ function formatChannelString(channelTitle, viewCount, publishedAt) {
 	else if (diff > 3.6e+6) {tempDate = Math.floor(diff / 3.6e+6); agoType = "hour"}
 	else if (diff > 60e3) {tempDate = Math.floor(diff / 60e3).toString(); agoType = "minute"} 
 
-	dateAgo = `${tempDate.toString()} ${curLang.dateTable[agoType][(tempDate > 1) ? 1 : 0]}`;
-	completeChannel = `${channelTitle} · ${viewCountStr} ${curLang.views} · ${dateAgo} ${curLang.ago}`
-	
-	return completeChannel;
+	dateAgo = `${tempDate.toString()} ${curLang.dateTable[agoType][(tempDate > 1) ? 1 : 0]} ${curLang.ago}`;
+	return dateAgo;
 }
+
+function completeChannelString(channelTitle, viewCount, publishedAt) {
+	return `${channelTitle} · ${viewCount} · ${publishedAt}`
+}
+
+
 
 //Function: Parses YouTube APIs' ISO 8601 PT duration string into an object, slightly modified so that the return string is in the (hh:)mm:ss format
 //Source: https://cheatcode.co/tutorials/how-to-fetch-a-youtube-videos-duration-in-node-js, 
@@ -155,8 +172,8 @@ function getDuration(durationString) {
 //Function: automatically updates the videoChannel innerText with the textBoxes' values
 function updateVideoChannel() {
 	videoTitle.innerText = titleTextBox.value;
-	videoLength.innerText = getDuration(lengthTextBox.value).string;
-	videoChannel.innerText = formatChannelString(channelTextBox.value, 
+	videoLength.innerText = lengthTextBox.value;
+	videoChannel.innerText = completeChannelString(channelTextBox.value, 
 		viewCountTextBox.value, 
 		dateTextBox.value
 	);
